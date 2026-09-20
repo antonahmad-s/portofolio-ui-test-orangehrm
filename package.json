@@ -1,0 +1,22 @@
+{
+  "name":"portofolio-ui-test-orangehrm",
+  "version":"1.0.0",
+  "private":true,
+  "description":"UI automation portfolio framework for OrangeHRM using Mocha, Chai and Selenium WebDriver",
+  "scripts":{
+    "test":"mocha "test/**/*.spec.js" --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=mochawesome-report,html=true,json=true,overwrite=true",
+    "test:headed":"HEADLESS=false mocha "test/**/*.spec.js" --timeout 60000 --reporter spec",
+    "report":"mochawesome-merge reports/*.json -o reports/merged-report.json && marge reports/merged-report.json -f index -o reports"
+  },
+  "dependencies":{
+    "chai":"^5.1.1",
+    "dotenv":"^16.4.5",
+    "mocha":"^10.7.0",
+    "mochawesome":"^7.1.3",
+    "mochawesome-merge":"^4.3.0",
+    "selenium-webdriver":"^4.24.0"
+  },
+  "devDependencies":{
+    "chromedriver":"^129.0.2"
+  }
+}
