@@ -3,9 +3,11 @@
 UI automation framework for OrangeHRM using JavaScript, Selenium WebDriver, Mocha, Chai, Page Object Model, Mochawesome, dotenv, and GitHub Actions.
 
 ## Application Under Test
+
 https://opensource-demo.orangehrmlive.com/
 
 ## Stack
+
 - Node.js
 - JavaScript
 - Selenium WebDriver
@@ -16,6 +18,7 @@ https://opensource-demo.orangehrmlive.com/
 - GitHub Actions
 
 ## Coverage
+
 - Valid login
 - Invalid login
 - Dashboard navigation
@@ -24,6 +27,7 @@ https://opensource-demo.orangehrmlive.com/
 - Logout
 
 ## Setup
+
 ```bash
 npm install
 cp .env.example .env
@@ -32,13 +36,19 @@ cp .env.example .env
 Populate `.env` with demo credentials.
 
 ## Run
+
 ```bash
 npm test
+npm run test:smoke
+npm run test:regression
 npm run test:headed
 npm run report
 ```
 
+`test:smoke` runs the critical login, dashboard, and logout flow. `test:regression` runs all other specs and excludes the smoke suite.
+
 ## Structure
+
 ```text
 config/
 src/pages/

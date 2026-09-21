@@ -5,6 +5,8 @@
   "description": "UI automation portfolio framework for OrangeHRM using Mocha, Chai and Selenium WebDriver",
   "scripts": {
     "test": "mocha \"test/**/*.spec.js\" --timeout 60000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=mochawesome-report,html=true,json=true,overwrite=true",
+    "test:smoke": "mocha \"test/smoke/**/*.spec.js\" --timeout 60000 --reporter spec",
+    "test:regression": "mocha \"test/**/*.spec.js\" --grep \"^(?!Smoke Suite)\" --timeout 60000 --reporter spec",
     "test:headed": "HEADLESS=false mocha \"test/**/*.spec.js\" --timeout 60000 --reporter spec",
     "report": "mochawesome-merge reports/*.json -o reports/merged-report.json && marge reports/merged-report.json -f index -o reports"
   },
