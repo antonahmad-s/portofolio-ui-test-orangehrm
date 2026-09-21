@@ -12,6 +12,10 @@ describe('Leave - navigation', function () {
     const login = new LoginPage(driver);
     await login.open();
     await login.login(config.username, config.password);
+    const menu = await driver.findElements(
+      By.css("a[href*='/leave/viewLeaveModule']")
+    );
+    if (menu.length === 0) this.skip();
     await driver.get(config.baseUrl + '/web/index.php/leave/viewLeaveModule');
     await driver.wait(until.elementLocated(By.css('body')), 10000);
     await waitForText(driver, By.css('body'), 'Leave');

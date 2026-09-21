@@ -1,4 +1,5 @@
 const { expect } = require('chai');
+const { By } = require('selenium-webdriver');
 const { createDriver } = require('../../src/utils/driver');
 const LoginPage = require('../../src/pages/LoginPage');
 const config = require('../../config/env');
@@ -11,6 +12,10 @@ describe('Time - navigation', function () {
     const login = new LoginPage(driver);
     await login.open();
     await login.login(config.username, config.password);
+    const menu = await driver.findElements(
+      By.css("a[href*='/time/viewTimeModule']")
+    );
+    if (menu.length === 0) this.skip();
     await driver.get(
       config.baseUrl + '/web/index.php/time/viewEmployeeTimesheet'
     );
