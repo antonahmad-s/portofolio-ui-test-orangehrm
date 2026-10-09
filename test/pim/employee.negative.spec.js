@@ -1,37 +1,30 @@
 const { expect } = require('chai');
-const { By, until } = require('selenium-webdriver');
 const { createDriver } = require('../../src/utils/driver');
 const LoginPage = require('../../src/pages/LoginPage');
+const PIMPage = require('../../src/pages/PIMPage');
 const config = require('../../config/env');
-const { waitForText } = require('../../src/utils/waits');
 
 describe('PIM - negative validation', function () {
   let driver;
+  let pim;
   beforeEach(async function () {
     driver = await createDriver();
     const login = new LoginPage(driver);
+    pim = new PIMPage(driver);
     await login.open();
     await login.login(config.username, config.password);
-    await driver.get(config.baseUrl + '/web/index.php/pim/addEmployee');
-    await waitForText(driver, By.css('body'), 'Add Employee');
   });
   afterEach(async function () {
     if (driver) await driver.quit();
   });
 
-  it('should show required validation when employee is submitted without mandatory fields', async function () {
-    const buttons = await driver.findElements(By.css('button'));
-    const texts = await Promise.all(buttons.map((b) => b.getText()));
-    const save = buttons[texts.findIndex((t) => t.trim() === 'Save')];
-    expect(save).to.not.equal(undefined);
-    await save.click();
-    await driver.wait(
-      until.elementLocated(By.css('.oxd-input-field-error-message')),
-      10000
-    );
-    const errors = await driver.findElements(
-      By.css('.oxd-input-field-error-message')
-    );
-    expect(errors.length).to.be.greaterThan(0);
+  it('should require first and last name when an employee is submitted empty', async function () {
+    await pim.submitEmptyEmployee();
+    const validationMessages = await pim.getValidationMessages();
+
+    expect(validationMessages).to.have.lengthOf(2);
+    expect(validationMessages).to.deep.equal(['Required', 'Required']);
+    expect(await driver.getCurrentUrl()).to.contain('/pim/addEmployee');
+    expect(await driver.findElements(pim.successToast)).to.have.lengthOf(0);
   });
 });

@@ -15,6 +15,12 @@ class DashboardPage {
     await this.driver.wait(until.elementLocated(this.userDropdown), 10000);
     await this.driver.findElement(this.userDropdown).click();
   }
+  async isUserMenuDisplayed() {
+    const logoutLink = By.css("a[href='/web/index.php/auth/logout']");
+    return Boolean(
+      await this.driver.wait(until.elementLocated(logoutLink), 10000)
+    );
+  }
   async logout() {
     await this.openUserMenu();
     const logoutLink = By.css("a[href='/web/index.php/auth/logout']");
