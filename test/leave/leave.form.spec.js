@@ -30,9 +30,34 @@ describe('Leave - apply form', function () {
   });
 
   it('should show validation when leave is submitted without required data', async function () {
+    await leave.openApplyLeave();
+    if (!(await leave.hasAvailableLeaveType('Annual Leave'))) {
+      this.skip();
+    }
     await leave.submitEmptyApplication();
     expect(
       (await driver.findElements(leave.validationErrors)).length
     ).to.be.greaterThan(0);
+  });
+
+  it('should submit leave when required data is provided', async function () {
+    const fromDate = new Date(Date.now() + 86400000);
+    const toDate = new Date(Date.now() + 172800000);
+
+    await leave.openApplyLeave();
+    if (!(await leave.hasAvailableLeaveType('Annual Leave'))) {
+      this.skip();
+    }
+
+    await leave.submitLeaveRequest({
+      leaveType: 'Annual Leave',
+      fromDate: fromDate.toISOString().slice(0, 10),
+      toDate: toDate.toISOString().slice(0, 10),
+      comment: 'Quarterly leave request',
+    });
+
+    expect(await driver.findElement(leave.successToast).getText()).to.contain(
+      'Success'
+    );
   });
 });

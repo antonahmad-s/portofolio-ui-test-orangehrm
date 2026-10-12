@@ -115,6 +115,7 @@ class PIMPage {
     const actions = await row.findElements(By.css('button'));
     await actions[0].click();
     await this.driver.wait(until.elementLocated(this.firstNameInput), 10000);
+    await this.waitForFormReady();
     const input = await this.driver.findElement(this.lastNameInput);
     await input.clear();
     await input.sendKeys(updatedLastName);

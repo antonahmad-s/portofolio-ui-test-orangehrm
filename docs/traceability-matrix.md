@@ -29,20 +29,23 @@
 | TC-LEAVE-001  | Leave       | Open Leave                         | Yes        |
 | TC-LEAVE-002  | Leave       | Leave navigation                   | Yes        |
 | TC-LEAVE-003  | Leave       | Apply leave form                   | Yes        |
-| TC-LEAVE-004  | Leave       | Submit leave with required data    | Planned    |
+| TC-LEAVE-004  | Leave       | Submit leave with required data    | Yes*       |
 | TC-LEAVE-005  | Leave       | Submit leave without required data | Yes        |
 | TC-LEAVE-006  | Leave       | Cancel leave request               | Planned    |
 | TC-REC-001    | Recruitment | Open Recruitment                   | Yes        |
 | TC-REC-002    | Recruitment | Candidate content                  | Yes        |
 | TC-REC-003    | Recruitment | Add candidate                      | Yes        |
 | TC-REC-004    | Recruitment | Missing required candidate data    | Yes        |
-| TC-REC-005    | Recruitment | Search candidate                   | Planned    |
+| TC-REC-005    | Recruitment | Search candidate                   | Yes        |
 | TC-TIME-001   | Time        | Open Time                          | Yes        |
 | TC-TIME-002   | Time        | Timesheet content                  | Yes        |
 | TC-LOGOUT-001 | Logout      | Successful logout                  | Yes        |
 | TC-PIM-004    | PIM         | Add employee                       | Yes        |
 | TC-PIM-005    | PIM         | Missing required employee data     | Yes        |
 | TC-PIM-006    | PIM         | Search existing employee           | Yes        |
+
+`*` The Leave scenarios requiring an `Annual Leave` entitlement are pending when
+the shared demo account has no available leave balance.
 | TC-PIM-007    | PIM         | Edit employee                      | Yes        |
 | TC-PIM-008    | PIM         | Delete employee                    | Yes        |
 
